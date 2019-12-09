@@ -1,0 +1,27 @@
+dist: trusty
+sudo: false
+language: cpp
+
+git:
+  submodules: false
+before_install:
+  - sed -i 's/git@github.com:/https:\/\/github.com\//' .gitmodules
+  - git submodule update --init --recursive
+
+addons:
+  apt:
+    sources:
+      - ubuntu-toolchain-r-test
+    packages:
+      - g++-8
+
+script:
+  - CORES=$(grep -c ^processor /proc/cpuinfo)
+  - CXX=/usr/bin/g++-8 CC=/usr/bin/gcc-8 cmake -DBUILD_TESTING=TRUE .
+  - make -j $CORES -l $CORES
+  #- make test -j $CORES -l $CORES
+
+# safelist
+branches:
+  only:
+    - master
