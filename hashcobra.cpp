@@ -33,31 +33,28 @@
 #define VERSION "v2.0.0-beta"
 #define ERR(str) std::cerr << "ERROR: " << str << '\n'
 
-static const char *h_algs[] = {"md4",    "md5",    "sha1",  "sha224",
-                               "sha256", "sha384", "sha512"};
-
-static const char *c_algs[] = {"zstd", "snappy", "zlib", "bzip2",
-                               "lz4",  "lz4hc",  "none"};
-
-static const char *oprs[] = {"create", "crack"};
-
 static void banner() { std::cout << "--==[ hashcobra by sepehrdad ]==--\n\n"; }
 
 static void version() { std::cout << "hashcobra " << VERSION << '\n'; }
 
 static void hashing_algorithms() {
+  static const char *h_algs[] = {"md4",    "md5",    "sha1",  "sha224",
+                                 "sha256", "sha384", "sha512"};
   std::cout << "Supported hashing algorithms:\n\n";
   for (const auto &alg : h_algs)
     std::cout << "    > " << alg << '\n';
 }
 
 static void compression_algorithms() {
+  static const char *c_algs[] = {"zstd", "snappy", "zlib", "bzip2",
+                                 "lz4",  "lz4hc",  "none"};
   std::cout << "Supported compression algorithms:\n\n";
   for (const auto &alg : c_algs)
     std::cout << "    > " << alg << '\n';
 }
 
 static void operations() {
+  static const char *oprs[] = {"create", "crack"};
   std::cout << "Supported operations:\n\n";
   for (const auto &opr : oprs)
     std::cout << "    > " << opr << '\n';
@@ -89,10 +86,6 @@ static void help() {
          "darkc0de.lst\n\n"
       << "  # Crack 1a1dc91c907325c69271ddf0c944bc72 using rt.db\n"
       << "  $ hashcobra -h 1a1dc91c907325c69271ddf0c944bc72 -r rt.db\n\n";
-}
-
-static constexpr unsigned int str2int(const char *str, int h = 0) {
-  return !str[h] ? 5381 : (str2int(str, h + 1) * 33) ^ str[h];
 }
 
 class database {
@@ -136,8 +129,8 @@ public:
   ~database() { delete db; }
 };
 
-static std::string hex_digest(const unsigned char *digest,
-                              unsigned int digest_len) {
+static std::string str2hex(const unsigned char *digest,
+                           unsigned int digest_len) {
   char hex_digest[digest_len * 2];
   static const char Hextable[] = "0123456789abcdef";
   for (unsigned i = 0; i < digest_len; ++i) {
@@ -146,6 +139,10 @@ static std::string hex_digest(const unsigned char *digest,
     hex_digest[i * 2 + 1] = Hextable[b & 0xf];
   }
   return std::string(hex_digest, digest_len * 2);
+}
+
+static constexpr unsigned int str2int(const char *str, int h = 0) {
+  return !str[h] ? 5381 : (str2int(str, h + 1) * 33) ^ str[h];
 }
 
 typedef unsigned char *(*hash_func_t)(const unsigned char *, size_t,
@@ -167,7 +164,7 @@ static void create(std::string &rpath, std::string &dpath,
   if (filestream.good() && filestream.is_open()) {
     while (getline(filestream, line)) {
       hash_func((unsigned char *)line.c_str(), line.size(), digest);
-      db.put(hex_digest(digest, digest_len), line);
+      db.put(str2hex(digest, digest_len), line);
     }
     filestream.close();
   } else {

@@ -6,3 +6,4 @@
 PKGBUILD
 .vscode
 *.o
+*.db

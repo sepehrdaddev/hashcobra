@@ -1,4 +1,4 @@
-CXXFLAGS	= -O2 -Wall -Wextra -std=c++17
+CXXFLAGS	= -O3 -Wall -Wextra -std=c++17 -march=native -s
 PREFIX		= /usr
 SBINDIR		= $(PREFIX)/bin
 PROJECT		= hashcobra
