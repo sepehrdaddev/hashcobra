@@ -4,6 +4,12 @@
 
 hashcobra Hash Cracking tool.
 
+## Description
+
+This tool uses a new method to crack hashes.
+With the help of rainbow tables concept this tool generates rainbow tables
+from wordlists to heavily optimize the cracking process.
+
 ## Usage
 
 ```
@@ -43,11 +49,47 @@ example:
 
 ```
 
-## Description
+### Supported Hashing Algorithms
 
-This tool uses Rainbow tables for cracking hashes <br>
-this makes it to be really fast and a lot faster than traditional <br>
-hash cracker.
+- blake2b-160
+- blake2b-256
+- blake2b-384
+- blake2b-512
+- blake2s-128
+- blake2s-160
+- blake2s-224
+- blake2s-256
+- md2
+- md4
+- md5
+- sha1
+- sha224
+- sha256
+- sha384
+- sha512
+- sha3-224
+- sha3-256
+- sha3-384
+- sha3-512
+- keccak-224
+- keccak-256
+- keccak-384
+- keccak-512
+- ripemd-128
+- ripemd-160
+- ripemd-256
+- ripemd-320
+- whirlpool
+- tiger
+
+### Supported Compression Algorithms
+
+- zstd
+- snappy
+- zlib
+- bzip2
+- lz4
+- lz4hc
 
 ## Build Prerequisites
 
@@ -57,12 +99,16 @@ hash cracker.
 
 - [Rocksdb](https://github.com/facebook/rocksdb) most recent verison is required.
 
-- [Openssl](https://github.com/openssl/openssl) most recent verison is required.
-
 ## Building
 
 ```
 $ make
+```
+
+## Installing
+
+```
+$ make install
 ```
 
 ## License

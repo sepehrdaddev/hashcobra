@@ -1,0 +1,25 @@
+# Attention: this is a Bash Script, not `sh`.
+
+#_hashcobra_options="-a <alg>     - hashing algorithm [default: md5].
+#-c <alg>     - compression algorithm [default: zstd].
+#-h <hash>    - hash to crack.
+#-r <path>    - rainbow table path [default: hashcobra.db].
+#-d <path>    - dictionary file path.
+#-o <opr>     - operation to do.
+#-V           - show version.
+#-H           - show help."
+
+_hashcobra()
+{
+    local current options
+
+    options="-a -c -h -r -d -o -V -H"
+
+    current="${COMP_WORDS[COMP_CWORD]}"
+
+    if [[ "${current}" == -* ]]; then
+        COMPREPLY=($(compgen -W "${options}" -- ${current}))
+    fi
+}
+
+complete -F _hashcobra hashcobra
