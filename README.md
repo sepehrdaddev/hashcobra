@@ -99,6 +99,12 @@ example:
 
 - [Rocksdb](https://github.com/facebook/rocksdb) most recent verison is required.
 
+## Downloading
+Because hashcobra relies on an externally linked repository, the --recursive flag must be passed with the git clone command
+```
+git clone --recursive git@github.com:sepehrdaddev/hashcobra.git
+```
+
 ## Building
 
 ```
