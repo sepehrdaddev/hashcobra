@@ -45,7 +45,7 @@ example:
   $ hashcobra -o create -a sha512 -c none -r rt.db -d darkc0de.lst
 
   # Crack 1a1dc91c907325c69271ddf0c944bc72 using rt.db
-  $ hashcobra -h 1a1dc91c907325c69271ddf0c944bc72 -r rt.db
+  $ hashcobra -o crack -h 1a1dc91c907325c69271ddf0c944bc72 -r rt.db
 
 ```
 
@@ -100,7 +100,9 @@ example:
 - [Rocksdb](https://github.com/facebook/rocksdb) most recent verison is required.
 
 ## Downloading
+
 Because hashcobra relies on an externally linked repository, the --recursive flag must be passed with the git clone command
+
 ```
 git clone --recursive git@github.com:sepehrdaddev/hashcobra.git
 ```

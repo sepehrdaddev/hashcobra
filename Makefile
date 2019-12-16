@@ -1,4 +1,3 @@
-CXX 		= g++
 CXXFLAGS 	= -O3 -Wall -Wextra -std=c++17 -march=native -s
 INCLUDES 	= -Ithird-party/libtomcrypt/src/headers
 LFLAGS		= -Lthird-party/libtomcrypt
@@ -13,7 +12,7 @@ SBINDIR		= $(PREFIX)/bin
 
 all: $(PROJECT)
 
-$(PROJECT):	depend $(OBJS)
+$(PROJECT): depend $(OBJS)
 	$(CXX) $(CXXFLAGS) $(INCLUDES) -o $(PROJECT) $(OBJS) $(LFLAGS) $(LIBS)
 
 .cpp.o:

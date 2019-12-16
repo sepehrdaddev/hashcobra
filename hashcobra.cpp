@@ -26,6 +26,15 @@
 #include <getopt.h>
 #include <iostream>
 #include <rocksdb/db.h>
+
+#define LTC_NO_TEST
+#define LTC_NO_CIPHERS
+#define LTC_NO_MODES
+#define LTC_NO_MACS
+#define LTC_NO_PRNGS
+#define LTC_NO_PK
+#define LTC_NO_PKCS
+#define LTC_NO_MISC
 #include <tomcrypt.h>
 
 #define VERSION "v2.0.0-beta"
@@ -88,7 +97,8 @@ static void help() {
       << "  $ hashcobra -o create -a sha512 -c none -r rt.db -d "
          "darkc0de.lst\n\n"
       << "  # Crack 1a1dc91c907325c69271ddf0c944bc72 using rt.db\n"
-      << "  $ hashcobra -h 1a1dc91c907325c69271ddf0c944bc72 -r rt.db\n\n";
+      << "  $ hashcobra -o crack -h 1a1dc91c907325c69271ddf0c944bc72 -r "
+         "rt.db\n\n";
 }
 
 class database {
