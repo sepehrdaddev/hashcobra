@@ -104,7 +104,7 @@ example:
 Because hashcobra relies on an externally linked repository, the --recursive flag must be passed with the git clone command
 
 ```
-git clone --recursive git@github.com:sepehrdaddev/hashcobra.git
+git clone --recursive https://github.com/sepehrdaddev/hashcobra.git
 ```
 
 ## Building
