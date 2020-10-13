@@ -56,7 +56,7 @@ jobs:
     - name: build
       run: |
         sudo apt update
-        sudo apt install gcc-8
+        sudo apt install gcc-8 librocksdb-dev
         git submodule update --init --recursive
         CORES=$(grep -c ^processor /proc/cpuinfo)
         CXX=/usr/bin/g++-8 CC=/usr/bin/gcc-8 make -j $CORES -l $CORES
