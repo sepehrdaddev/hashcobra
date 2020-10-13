@@ -59,7 +59,7 @@ jobs:
         sudo apt install gcc-8
         git submodule update --init --recursive
         CORES=$(grep -c ^processor /proc/cpuinfo)
-        make -j $CORES -l $CORES
+        CXX=/usr/bin/g++-8 CC=/usr/bin/gcc-8 make -j $CORES -l $CORES
 
     # ℹ️ Command-line programs to run using the OS shell.
     # 📚 https://git.io/JvXDl
