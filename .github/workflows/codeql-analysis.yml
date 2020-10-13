@@ -32,7 +32,9 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v2
       with:
-        args: git submodule update --init --recursive
+        # We must fetch at least the immediate parents so that if this is
+        # a pull request then we can checkout the head.
+        fetch-depth: 2
 
     # If this run was triggered by a pull request event, then checkout
     # the head of the pull request instead of the merge commit.
@@ -53,6 +55,7 @@ jobs:
     # If this step fails, then you should remove it and run the build manually (see below)
     - name: build
       run: |
+        git submodule update --init --recursive
         make
 
     # ℹ️ Command-line programs to run using the OS shell.
