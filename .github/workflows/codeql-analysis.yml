@@ -55,8 +55,11 @@ jobs:
     # If this step fails, then you should remove it and run the build manually (see below)
     - name: build
       run: |
+        sudo apt update
+        sudo apt install gcc-8
         git submodule update --init --recursive
-        make
+        CORES=$(grep -c ^processor /proc/cpuinfo)
+        make -j $CORES -l $CORES
 
     # ℹ️ Command-line programs to run using the OS shell.
     # 📚 https://git.io/JvXDl
